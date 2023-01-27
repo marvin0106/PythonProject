@@ -42,7 +42,7 @@ def main():
         st.write(' ')
 
     with col2:
-        st.image("logo.jpg")
+        st.image("logo_new.png")
 
     with col3:
     # Add button
@@ -79,6 +79,7 @@ def main():
         
     # Add a section for features    
     st.markdown("<p style='font-size: 30px; font-weight: 625'>Features offered:</p>", unsafe_allow_html=True)
+    st.markdown("<p style=' font-size: 25px; font-weight: 500;'>- Newsletter with information on insider activities of the largest US companies 	✅</p>", unsafe_allow_html=True)
     st.markdown("<p style=' font-size: 25px; font-weight: 500;'>- Monitor insider trading activity for all S&P500 companies 	✅</p>", unsafe_allow_html=True)
     st.markdown("<p style=' font-size: 25px; font-weight: 500;'>- Search and filter through insider trading data 	✅</p>", unsafe_allow_html=True)
     st.markdown("<p style='font-size: 25px; font-weight: 500;'>- Analyze stock data and performance 	✅</p>", unsafe_allow_html=True)
@@ -150,7 +151,8 @@ def main():
 Stocklist = pd.read_excel("Stocklist.xlsx")
 StocksnTickers = Stocklist.iloc[1:, [0,1]]
 StocksnTickers.columns = ['Ticker', 'Company Name']
-
+    # Add logo
+st.sidebar.image("logo_new.png")
     # Add a search box
 search_term = st.sidebar.text_input("Ticker or Company Search")
 
@@ -166,49 +168,3 @@ if __name__ == "__main__":
 
 
 
-
-# import streamlit as st
-# import pandas as pd
-
-# st.set_page_config(
-#     page_title ="Insidertrading Screener - Home",
-#     page_icon="📈",   
-# )
-
-# def main():
-#   st.title("Home")
-
-#   st.markdown("Welcome to the Insider Trading and Stock Analysis app! Here you can explore the latest insider trading activity and analyze stock data to make informed investment decisions.")
-
-#   # st.image("/Users/marvinsilvafortes/Desktop/7. Semester/Econ mit Python x/Project/pages/homepage_image.jpg", width=600)
-
-#   st.sidebar.title("Andere Darstellungsmöglichkeiten")
-  
-  
-# if __name__ == "__main__":
-#   main()
-
-# st.header("General Info on Insider Trading")
-# st.markdown("etc.")
-# st.header("Project Members:")
-# st.markdown("Possiblity for Pictures etc.")
-
-# st.header("Stock Names & Tickers")
-
-# Stocklist = pd.read_excel("Stocklist.xlsx")
-# StocksnTickers = Stocklist.iloc[1:, [0,1]]
-# StocksnTickers.columns = ['Ticker', 'Company Name']
-
-# #with st.sidebar.expander("All Companies"): 
-# #    st.table(StocksnTickers)
-
-# # Add a search box
-# search_term = st.sidebar.text_input("Ticker or Company Search")
-
-# # Filter the DataFrame based on the search term
-# filtered_df = StocksnTickers[(StocksnTickers['Company Name'].str.contains(search_term, case=False, na=False)) | (StocksnTickers['Ticker'].str.contains(search_term, case=False, na=False))]
-
-# # Show the filtered DataFrame
-# with st.sidebar:
-#     st.dataframe(filtered_df)
-    

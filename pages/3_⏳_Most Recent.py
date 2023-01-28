@@ -16,7 +16,7 @@ import locale
 import datetime
 
 st.set_page_config(
-    page_title="iInsider • Most Recent",
+    page_title="InsidersInvest • Most Recent",
     page_icon="⏳",
     layout="wide")
 

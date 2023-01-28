@@ -10,6 +10,10 @@ import yfinance as yf
 import pandas as pd
 
 
+st.set_page_config(
+    page_title="InsidersInvest • Stock Data",
+    page_icon="📈",
+    layout="wide")
 
 # Get stock data from yfinance
 def get_stock_data(ticker, period):

@@ -10,13 +10,19 @@ import pandas as pd
 import streamlit as st
 import yfinance as yf
 import matplotlib.pyplot as plt
-import streamlit.components.v1 as components
+#import streamlit.components.v1 as components
 import mpld3
 import locale
 import datetime
 
+st.set_page_config(
+    page_title="iInsider • Most Recent",
+    page_icon="⏳",
+    layout="wide")
 
+#plt.style.use("default")
 plt.style.use("seaborn-darkgrid")
+
 print(plt.style.available)
 
 st.sidebar.title("Stock Filter")
@@ -38,9 +44,9 @@ companies = companies_input.split(",")
 # Text Section
 # =============================================================================
 
-st.title("1000 Most Recent Insider Trades")
-st.markdown("This Table contains the most recent SEC filings for insider Trading Buys & Sells")
-st.markdown("Option exercises are not considered")
+st.title("Recent Insider Trades")
+st.markdown("This table contains the most recent SEC-Filings for insider trading purchases & sales.")
+st.markdown("This page reflects the most recent 1000 insider Trades sorted by SEC-Filing date. Also, you may apply filters to search for a specific company in the database. The tabs <Chart> and <Performance> then allow you to dive further in depth into the insider trading data displayed in <Table>.")
 
 
 
@@ -59,10 +65,10 @@ with st.sidebar:
 
 # Filter Box: 
 if companies_input:
-    st.success("Stock Filter for: " + companies_input.upper())
+    st.success(" Stock Filter for: " + companies_input.upper(), icon = "✅")
 #    st.markdown(get_company_name(companies_input))
 else:
-    st.warning("Enter a comma-separated list of company tickers to filter")
+    st.warning(" Enter a comma-separated list of company tickers to filter", icon ="💡")
     
 tab1, tab2, tab3 = st.tabs(["Table", "Chart", "Performance"])
 
@@ -85,13 +91,13 @@ for company in companies:
         with tab1:
             st.table(insider)
         with tab2: 
-            st.markdown("Stock Chart from filtered Stock:")  
+            st.markdown("")  
             try:
                 def get_stock_data(ticker, period):
                     stock_data = yf.Ticker(ticker).history(period=period)
                     return stock_data
             except NameError:
-                st.warning("Stock filter not applied, therefore no chart can be displayed here.")
+                st.warning(" Stock filter not applied, therefore no chart can be displayed here.", icon ="❌")
                     
     # Stock Chart
   
@@ -126,7 +132,7 @@ for company in companies:
             try: 
                 st.line_chart(stock_data['Close'])
             except NameError:
-                st.warning("Stock filter not applied, therefore no chart can be displayed here.")
+                st.warning(" Stock filter not applied, therefore no chart can be displayed here.", icon ="❌")
             
             
             
@@ -144,11 +150,13 @@ for company in companies:
             
             print(purchase_df)
             st.header("Table with Insider-Purchases")
-            st.table(purchase_df)
+            with st.expander("Click to Expand"):
+                st.table(purchase_df)
             
             print(sale_df)
             st.header("Table with Insider-Sales:")
-            st.table(sale_df)
+            with st.expander("Click to Expand"):
+                st.table(sale_df)
             
             insider.iloc[:,1] = pd.to_datetime(insider.iloc[:,1])
             
@@ -157,7 +165,7 @@ for company in companies:
             try:
                 plt.plot(stock_data["Close"], color="k", linewidth = "1")
             except NameError: 
-                st.warning("Stock filter not applied, therefore no chart can be displayed here.")
+                st.warning(" Stock filter not applied, therefore no chart can be displayed here.", icon ="❌")
             plt.xlabel("Date")
             plt.ylabel("Price in $")
             plt.title(f"{ticker_symbol} ".upper()+ "Price", fontsize=16)
@@ -176,15 +184,26 @@ for company in companies:
 
             for index, row in purchase_df.iterrows():
                 date = pd.to_datetime(row[1])
-                plt.axvline(x=date, color="b", linestyle="dotted", linewidth=".8")
+                plt.axvline(x=date, color="b", linestyle="dotted", linewidth=".85")
             
             for index, row in sale_df.iterrows():
                 date = pd.to_datetime(row[1])
-                plt.axvline(x=date, color="r", linestyle="dotted", linewidth=".8")
+                plt.axvline(x=date, color="r", linestyle="dotted", linewidth=".85")
+                
+            # =======MATPLOTLIB INTEGRATED LEGEND
+            plt.legend(frameon=False, fontsize =15, facecolor ="white")
+            import matplotlib.patches as mpatches
+            blue_patch = mpatches.Patch(color='blue', label='purchases')
+            red_patch = mpatches.Patch(color='red', label='sales')
+            plt.legend(handles=[blue_patch, red_patch],loc='upper left')
+            # ========MATPLOTLIB INTEGRATED LEGEND END
             
             st.pyplot(fig)
             plt.show()
             
+ 
+            
+        
         with tab3:
             purchase_df = purchase_df.drop(columns=["Filing\xa0Date", "Owned", "ΔOwn"])
             purchase_df["Trade\xa0Date"] = purchase_df["Trade\xa0Date"].dt.date
@@ -287,7 +306,8 @@ for company in companies:
             
             # END OF ALPHA ====================================================
 
-            # Transform back before putting into Table:             
+            # Transform back before putting into Table:
+            merged_df['Date'] = pd.to_datetime(merged_df['Date'], format='%Y-%m-%d').dt.strftime('%Y-%m-%d')
             merged_df['Price'] = merged_df['Price'].astype(str)
             merged_df['Closing_Price'] = merged_df['Closing_Price'].astype(str)
             merged_df['Price'] = "$"+merged_df['Price']
@@ -313,10 +333,19 @@ for company in companies:
             st.header("Purchase Performance per Trade")
             st.table(merged_df)
                    
+            # st.header("Average Insider Trade Performance until today vs. Market Performance until today Bar-Chart")
+
+            # st.write(type(merged_df['Percent_Change'][0]))
+            # st.table(merged_df['Percent_Change"])
+            # merged_df['Percent_Change'] = pd.to_numeric(merged_df['Percent_Change'].str.replace('%',''))
+            # merged_df['S&P500_PCT_Change'] = pd.to_numeric(merged_df['S&P500_PCT_Change'].str.replace('%',''))
+            # print(merged_df.columns)
+            # st.write(merged_df.columns)
+            
             
             
     except KeyError:
-        st.warning("Entered Ticker Filter <" + company.upper() +"> is Invalid or does not exist")
+        st.warning(" Entered Ticker Filter <" + company.upper() +"> is Invalid or does not exist", icon ="⚠️")
 
 insider.to_csv("chosen_companies.csv")
 

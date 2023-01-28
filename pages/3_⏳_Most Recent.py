@@ -45,13 +45,13 @@ companies = companies_input.split(",")
 # =============================================================================
 
 st.title("Recent Insider Trades")
-st.markdown("This table contains the most recent SEC-Filings for insider trading purchases & sales.")
-st.markdown("This page reflects the most recent 1000 insider Trades sorted by SEC-Filing date. Also, you may apply filters to search for a specific company in the database. The tabs <Chart> and <Performance> then allow you to dive further in depth into the insider trading data displayed in <Table>.")
+#st.markdown("This table contains the most recent SEC-Filings for insider trading purchases & sales.")
+st.markdown("This page reflects the most recent 1000 insider Trades sorted by SEC-Filing date. Also, you may apply filters to search for a specific company in the database. The tabs <Chart> and <Performance> then allow you to dive further in depth into insider trading data selected by you.")
 
 
 
 with st.sidebar: 
-    st.sidebar.title("Name Search")
+    st.sidebar.title("Stock Search")
     Stocklist = pd.read_excel("Stocklist.xlsx")
     StocksnTickers = Stocklist.iloc[1:, [0,1]]
     StocksnTickers.columns = ['Ticker', 'Company Name']

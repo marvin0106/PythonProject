@@ -18,15 +18,19 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-st.set_page_config(page_title = "Case Studies")
+st.set_page_config(
+    page_title="InsidersInvest • Case Studies",
+    page_icon="🔎",
+    layout="wide")
 
 st.title("Case Studies")
 
+image_path = "/Users/marvinsilvafortes/Documents/GitHub/PythonProject/App/"
 
 tab1 , tab2, tab3, tab4 = st.tabs(["Apple Inc.", "Microsoft", "Tesla", "Occidental"])
 
 with tab1:
-    Image = plt.imread("Apple_logo_grey.png")
+    Image = plt.imread(image_path + "Apple_logo_grey.png")
     st.image(Image, width=(150)	)
     st.header("Apple Inc.")
     
@@ -232,7 +236,7 @@ with tab1:
     st.markdown("Looking at Apple's share price performance over the last year, declining by about 25%, we saw exclusively sales of insiders in the period. Additionally, the activity of insiders is not equally distributed over the last 12 months. Insiders activity was close to 0 in the last 3 months.")
     
 with tab2:
-    Image = plt.imread("Microsoft_logo.png")
+    Image = plt.imread(image_path + "Microsoft_logo.png")
     st.image(Image, width=(200)	)
     st.header("Microsoft Corporation")
     
@@ -439,7 +443,7 @@ with tab2:
     
 
 with tab3:
-    Image = plt.imread("Tesla_Motors.png")
+    Image = plt.imread(image_path + "Tesla_Motors.png")
     st.image(Image, width=(125)	)
     st.header("Tesla, Inc.")
     
@@ -645,7 +649,7 @@ with tab3:
     st.markdown("Over the last 12 months, Tesla Insiders sold current holdings and did not increase their positions. Famously, the CEO of Tesla, Elon Musk, was heavily involved in a project outside of Tesla, the acquisition of the social media platform Twitter. On the one hand, Elon had to sell Tesla shares to finance the transaction and, on the other hand, other insiders might have sold parts of their positions aswell due to the process.")
 
 with tab4:
-    Image = plt.imread("Occidental-Petroleum.png")
+    Image = plt.imread(image_path + "Occidental-Petroleum.png")
     st.image(Image, width=(150)	)
     st.header("Occidental Petroleum Corporation")
     

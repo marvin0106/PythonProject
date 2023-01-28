@@ -4,19 +4,21 @@ Created on Wed Jan 25 22:32:49 2023
 
 @author: Alexander-NB
 """
+import streamlit as st
+import pandas as pd
+st.set_page_config(page_title="InsidersInvest • Home", page_icon="📈",
+                  layout='wide', initial_sidebar_state='expanded')
+
+image_path = "/Users/marvinsilvafortes/Documents/GitHub/PythonProject/App/"
 
 with open('style.css', 'w') as file:
     file.write("body {background-image: url('background.png'); background-size: cover;}")
 
-import streamlit as st
-import pandas as pd
 
 
-st.set_page_config(page_title="InsidersInvest", page_icon="📈",
-                  layout='wide', initial_sidebar_state='expanded')
 import base64
 def add_bg_from_local(image_file):
-    with open(r"C:\Users\Alexander-NB\OneDrive\Desktop\Uni\6. Semester\FEWP\Project\App\{}".format(image_file), "rb") as image_file:
+    with open(image_path + r"{}".format(image_file), "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
     st.markdown(
     f"""
@@ -42,7 +44,7 @@ def main():
         st.write(' ')
 
     with col2:
-        st.image("logo_new.png")
+        st.image(image_path + "logo_new.PNG")
 
     with col3:
     # Add button
@@ -71,7 +73,7 @@ def main():
         st.write(' ')
 
     with col2:
-        st.image("CEOs.png")
+        st.image(image_path + "CEOs.png")
 
     with col3:
         st.write(' ')
@@ -117,13 +119,13 @@ def main():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.image("congress3.png", width = 500)
+        st.image(image_path + "congress3.png", width = 500)
 
     with col2:
         st.write(' ')
      
     with col3:   
-        Quiver_button = st.button("Checkout Quiver Quantitative")
+        Quiver_button = st.button("Check out: Quiver Quantitative!")
         if Quiver_button:
             webbrowser.open("https://www.quiverquant.com/strategies/")
      
@@ -136,7 +138,7 @@ def main():
     
     Try_button = st.button("Try it now")
     if Try_button:
-        webbrowser.open("http://localhost:8501/")
+        webbrowser.open("http://localhost:8501/Most_Recent")
             
 
         
@@ -152,7 +154,7 @@ Stocklist = pd.read_excel("Stocklist.xlsx")
 StocksnTickers = Stocklist.iloc[1:, [0,1]]
 StocksnTickers.columns = ['Ticker', 'Company Name']
     # Add logo
-st.sidebar.image("logo_new.png")
+st.sidebar.image(image_path + "logo_new.PNG")
     # Add a search box
 search_term = st.sidebar.text_input("Ticker or Company Search")
 

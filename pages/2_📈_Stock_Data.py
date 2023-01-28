@@ -30,7 +30,18 @@ def main():
   period_options = ["1d", "5d", "1mo", "3mo", "6mo", "1y", "2y", "5y", "10y", "ytd", "max"]
 
   period = st.sidebar.selectbox("Period", period_options, index=5)
-
+  
+  
+  with st.sidebar: 
+      st.sidebar.title("Stock Search")
+      Stocklist = pd.read_excel("Stocklist.xlsx")
+      StocksnTickers = Stocklist.iloc[1:, [0,1]]
+      StocksnTickers.columns = ['Ticker', 'Company Name']
+      
+      search_term = st.sidebar.text_input("Ticker or Company Name Search")
+      
+      filtered_df = StocksnTickers[(StocksnTickers['Company Name'].str.contains(search_term, case=False, na=False)) | (StocksnTickers['Ticker'].str.contains(search_term, case=False, na=False))]
+      st.dataframe(filtered_df)
 
   # Display stock chart and data
   if ticker_symbol:

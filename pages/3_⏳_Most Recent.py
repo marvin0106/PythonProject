@@ -317,6 +317,7 @@ for company in companies:
             merged_df['Percent_Change'] = merged_df['Percent_Change'].round(2)
             merged_df['Percent_Change'] = merged_df['Percent_Change'].apply('{:.2f}%'.format)
             
+            merged_df = merged_df.drop(columns=["Value"])
 
             
             # Take or Drop SnP500 at Trade Date 

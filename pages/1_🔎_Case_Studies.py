@@ -25,7 +25,7 @@ st.set_page_config(
 
 st.title("Case Studies")
 
-image_path = "/Users/marvinsilvafortes/Documents/GitHub/PythonProject/App/"
+image_path = "/workspaces/PythonProject/App/"
 
 tab1 , tab2, tab3, tab4 = st.tabs(["Apple Inc.", "Microsoft", "Tesla", "Occidental"])
 

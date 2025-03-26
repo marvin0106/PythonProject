@@ -9,7 +9,7 @@ import pandas as pd
 st.set_page_config(page_title="InsidersInvest • Home", page_icon="📈",
                   layout='wide', initial_sidebar_state='expanded')
 
-image_path = "/Users/marvinsilvafortes/Documents/GitHub/PythonProject/App/"
+image_path = "/workspaces/PythonProject/App/"
 
 with open('style.css', 'w') as file:
     file.write("body {background-image: url('background.png'); background-size: cover;}")
@@ -154,7 +154,7 @@ Stocklist = pd.read_excel("Stocklist.xlsx")
 StocksnTickers = Stocklist.iloc[1:, [0,1]]
 StocksnTickers.columns = ['Ticker', 'Company Name']
     # Add logo
-st.sidebar.image(image_path + "logo_new.PNG")
+st.sidebar.image(image_path + "logo_new.PNG") 
     # Add a search box
 search_term = st.sidebar.text_input("Ticker or Company Search")
 

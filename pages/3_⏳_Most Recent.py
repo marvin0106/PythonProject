@@ -20,8 +20,8 @@ st.set_page_config(
     page_icon="⏳",
     layout="wide")
 
-#plt.style.use("default")
-plt.style.use("seaborn-darkgrid")
+plt.style.use("default")
+#plt.style.use("seaborn-darkgrid")
 
 print(plt.style.available)
 

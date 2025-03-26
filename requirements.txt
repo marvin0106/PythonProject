@@ -1,0 +1,9 @@
+streamlit
+yfinance
+pandas
+matplotlib
+mpld3
+locale
+datetime
+openpyxl
+lxml

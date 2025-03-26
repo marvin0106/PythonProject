@@ -1,4 +1,1 @@
-,Filing Date,Trade Date,Ticker,Insider Name,Title,Trade Type,Price,Qty,Owned,ΔOwn,Value
-27,2020-03-17 16:24:28,2020-03-13,JNJ,Perez William D,Dir,P - Purchase,$127.69,500,16030,+3%,"+$63,843"
-31,2019-12-16 16:40:47,2019-12-13,JNJ,Joly Hubert,Dir,P - Purchase,$141.28,5000,5000,New,"+$706,399"
-32,2019-06-11 17:01:55,2019-06-11,JNJ,Hewson Marillyn A,Dir,P - Purchase,$139.68,3000,3000,New,"+$419,040"
+,Filing Date,Trade Date,Ticker,Company Name,Insider Name,Title,Trade Type,Price,Qty,Owned,ΔOwn,Value
